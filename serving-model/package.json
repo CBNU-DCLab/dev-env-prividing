@@ -1,7 +1,7 @@
 {
   "name": "model-serve",
   "version": "1.0.0",
-  "description": "For using, please README.md of https://github.com/CBNU-DCLab/dev-env-prividing/node",
+  "description": "For using, please README.md of https://github.com/CBNU-DCLab/dev-env-providing/tree/main/serving-model",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CBNU-DCLab/dev-env-prividing.git"
+    "url": "git+https://github.com/CBNU-DCLab/dev-env-providing.git"
   },
   "author": "Penguin135",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CBNU-DCLab/dev-env-prividing/issues"
+    "url": "https://github.com/CBNU-DCLab/dev-env-providing/issues"
   },
-  "homepage": "https://github.com/CBNU-DCLab/dev-env-prividing#readme",
+  "homepage": "https://github.com/CBNU-DCLab/dev-env-providing#readme",
   "dependencies": {
     "express": "^4.17.1"
   }
