@@ -1,0 +1,15 @@
+# Basic provisioning example
+
+- name: Ansible test
+  hosts: localhost
+  tasks:
+    - name: launching AWS instance using Ansible
+      ec2:
+        key_name: user-kepair-name
+        instance_type: t2.micro
+        image: ami-id
+        region: insert region
+        wait: yes
+        count: 2
+        vpc_subnet_id: subnet-d8735e84
+        assign_public_ip: yes
