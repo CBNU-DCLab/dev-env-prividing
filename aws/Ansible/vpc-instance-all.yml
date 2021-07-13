@@ -67,7 +67,7 @@
       register: key_result
 
     - name: Save Private Key
-      copy: content= "{{ key_result.key.private_key }}" dest=/home/ec2-user/.ssh/testkey.pem mode=0400
+      copy: content="{{ key_result.key.private_key }}" dest=/home/ec2-user/.ssh/testkey.pem mode=0400
       when: key_result.changed
 
     - name: Create EC2
