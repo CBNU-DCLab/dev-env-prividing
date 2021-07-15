@@ -21,6 +21,7 @@
         state: present
         tags:
           Name: seoul_igw
+      register: gateway_result
       # vars:
       #   ansible_python_interpreter: /bin/python3
       #
@@ -40,6 +41,9 @@
         region: ap-northeast-2
         state: present
         subnets: ["{{ subnet_result.subnet.id }}"]
+        routes:
+          - dest: 0.0.0.0/0
+            gateway_id: "{{ gateway_result.id }}"
 
     - name: Create Security Group
       ec2_group:
