@@ -17,8 +17,8 @@ aws_secret_access_key = <your secret key>
 
 - ansible 환경변수 등록
 ```
-export AWS_SECRET_ACCESS_KEY=zNxiejQisR7mrA/6BZWdgjh3J/BkeBKobOdZGWWd
-export AWS_ACCESS_KEY_ID=AKIAVYDYMS3K3ZDNCCNX
+export AWS_SECRET_ACCESS_KEY=<your access key>
+export AWS_ACCESS_KEY_ID=<your secret key>
 ```
 
 ## 실행
