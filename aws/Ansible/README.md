@@ -35,4 +35,4 @@ ansible-playbook vpc-instance-all.yml
 - Security Group
 - EC2 key
 - private key : `/home/ec2-user/.ssh/testkey.pem` 으로 저장
-- 
+- t2.micro type EC2 instance (ubuntu)
