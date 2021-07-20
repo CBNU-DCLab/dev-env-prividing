@@ -80,7 +80,8 @@ $ wget http://localhost:3000/get/model/model/1.1
 
 ### local에 있는 파일을 업로드
 
-`curl`의 `-F (--form)` 옵션을 이용하여 파일을 업로드
+`curl`의 `-F (--form)` 옵션을 이용하여 파일을 업로드합니다.
+파일이 업로드 되는 경로는 nodejs 서버의 `/models` 입니다
 ```
 $ curl -F 'modelFile=@/home/ubuntu/다운로드/Postman-linux-x64-8.5.0.tar.gz' http://localhost:3000/upload/model
 ```
