@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/CBNU-DCLab/dev-env-providing#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1"
   }
 }
