@@ -41,15 +41,24 @@ $ curl http://localhost:3000
   <head>
   <body>
     <h3> list of models </h3>
-    <p> /list/model <p>
+    <p> curl http://(server-ip):3000/list/model </p>
     <br>
+
     <h3> download specific model using wget</h3>
-    <p> /get/model/(model name)/(model version) <p>
+    <p> wget http://(server-ip):3000/get/model/(model name)/(model version) </p>
     <br>
+
     <h3> download specific latest model using wget</h3>
-    <p> /get/model/(model name) <p>
+    <p> wget http://(server-ip):3000/get/model/(model name) </p>
+    <br>
+
+    <h3> upload model file using curl </h3>
+    <p> curl -F 'modelFile=@/path/to/file/(model name)' http://(server-ip):3000/upload/model </p>
+    <br>
+    
+    <h3> delete specific model file using curl </h3>
+    <p> curl -X DELETE http://(server-ip):3000/delete/(model name) </p>
   </body>
-  </html>
 ```
 
 ### model list 확인
@@ -57,7 +66,7 @@ $ curl http://localhost:3000
 컨테이너의 `/models`에 있는 model들의 목록을 확인합니다
 
 ```
-$ curl http://localhost:3000/list/mode
+$ curl http://(server-ip):3000/list/model
 ```
 
 ### 최신 버전의 model을 다운로드 합니다
@@ -66,7 +75,7 @@ model의 이름 형식은 `<모델이름>-<모델버전>` 으로 정해져야 �
 해당 이름의 model이 존재하지 않으면 `404 Not Found`를 반환합니다.
 
 ```
-$ wget http://localhost:3000/get/model/model
+$ wget http://(server-ip):3000/get/model/(model name)
 ```
 
 ### 특정 버전의 model을 다운로드 합니다
@@ -75,7 +84,7 @@ model의 이름 형식은 `<모델이름>-<모델버전>` 으로 정해져야 �
 해당 이름의 model이 존재하지 않으면 `404 Not Found`를 반환합니다.
 
 ```
-$ wget http://localhost:3000/get/model/model/1.1
+$ wget http://(server-ip):3000/get/model/(model name)/(model version)
 ```
 
 ### local에 있는 파일을 업로드
@@ -83,7 +92,14 @@ $ wget http://localhost:3000/get/model/model/1.1
 `curl`의 `-F (--form)` 옵션을 이용하여 파일을 업로드합니다.
 파일이 업로드 되는 경로는 nodejs 서버의 `/models` 입니다
 ```
-$ curl -F 'modelFile=@/home/ubuntu/다운로드/Postman-linux-x64-8.5.0.tar.gz' http://localhost:3000/upload/model
+$ curl -F 'modelFile=@/path/to/file/(model name)' http://(server-ip):3000/upload/model
+```
+
+### 특정 model 파일 삭제
+
+`curl`을 `DELETE` method 방식으로 요청하여 특정 model 파일을 삭제합니다.
+```
+$ curl -X DELETE http://(server-ip):3000/delete/(model name)
 ```
 
 ## Deployment / 배포
