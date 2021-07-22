@@ -1,6 +1,8 @@
 # 참고 사이트
-- ansible vpc, instance 생성 : https://honglab.tistory.com/44
+- ansible vpc, instance 생성 스크립트 : https://honglab.tistory.com/44
 - region 별 instance type 확인 : https://blog.voidmainvoid.net/390
+- VPC, Subnet, Route 설정 : https://www.44bits.io/ko/post/understanding_aws_vpc
+- ansible ec2_vpc example : https://runebook.dev/ko/docs/ansible/collections/community/aws/ec2_vpc_route_table_module
 
 
 ## 설치 방법
@@ -35,4 +37,4 @@ ansible-playbook vpc-instance-all.yml
 - Security Group
 - EC2 key
 - private key : `/home/ec2-user/.ssh/testkey.pem` 으로 저장
-- t2.micro type EC2 instance (ubuntu)
+- EC2 instance 생성 (type t.micro)
