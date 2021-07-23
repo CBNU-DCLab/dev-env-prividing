@@ -1,5 +1,6 @@
 # 참고 사이트
 - ansible vpc 생성 : https://docs.ansible.com/ansible/2.3/ecs_ecr_module.html
+- repository 삭제 : https://stackoverflow.com/questions/47573616/how-to-delete-aws-ecs-repositories-which-contain-images-using-ansible
 
 
 ## 실행
@@ -10,10 +11,12 @@ ansible-playbook ecr-create.yml
 `ecs_ecr` resource의 `name`에 지정한 이름의 registry가 생성됨.
 
 
+
 ```
 ansible-playbook ecr-destroy.yml
 ```
 `ecs_ecr` resource의 `name`에 지정한 이름의 registry가 제거됨.
+
 
 
 ## docker login
