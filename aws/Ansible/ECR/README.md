@@ -7,6 +7,14 @@
 ```
 ansible-playbook ecr-create.yml
 ```
+`ecs_ecr` resource의 `name`에 지정한 이름의 registry가 생성됨.
+
+
+```
+ansible-playbook ecr-destroy.yml
+```
+`ecs_ecr` resource의 `name`에 지정한 이름의 registry가 제거됨.
+
 
 ## docker login
 `ecr-create.yml`플레이북을 실행하면 `ecr-login.sh`이 실행되고, 생성된 aws ECR에 대한 docker login을 자동으로 수행.
