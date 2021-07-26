@@ -7,7 +7,7 @@
   tasks:
     - name: launching AWS instance using Ansible
       ec2:
-        key_name: aws-kkj-key
+        key_name: aws-key name
         instance_type: t2.micro
         image: ami-0ba5cd124d7a79612
         region: ap-northeast-2
@@ -17,5 +17,7 @@
       register: ec2_instance
 
     - name: get instance id
-      ansible.builtin.script:
-        cmd: echo {{ ec2_instance.instance_id }}
+      ansible.builtin.shell: echo {{ ec2_instance.instance_ids }}
+      register: instance_id
+
+    - debug: msg="{{ instance_id.stdout }}"
