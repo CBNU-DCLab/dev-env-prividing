@@ -2,14 +2,22 @@
 
 - name: Ansible test
   hosts: localhost
+  vars:
+    ansible_python_interpreter: /bin/python3
   tasks:
     - name: launching AWS instance using Ansible
       ec2:
-        key_name: user-kepair-name
+        key_name: aws-key name
         instance_type: t2.micro
-        image: ami-id
-        region: insert region
+        image: ami-0ba5cd124d7a79612
+        region: ap-northeast-2
         wait: yes
-        count: 2
-        vpc_subnet_id: subnet-d8735e84
-        assign_public_ip: yes
+        count: 1
+        vpc_subnet_id: subnet-2929d142
+      register: ec2_instance
+
+    - name: get instance id
+      ansible.builtin.shell: echo {{ ec2_instance.instance_ids }}
+      register: instance_id
+
+    - debug: msg="{{ instance_id.stdout }}"
