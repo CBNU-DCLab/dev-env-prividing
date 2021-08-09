@@ -6,16 +6,22 @@
 ## 실행
 - ansible playbook 실행
 ```
-ansible-playbook ecr-create.yml
+ansible-playbook ecr-create.yml -e "name=hello/world"
 ```
-`ecs_ecr` resource의 `name`에 지정한 이름의 registry가 생성됨.
+name으로 설정하는 문자열의 이름을 가진 repository가 됨
+name을 설정하지 않고 palybook 실행 시, `up/down` 이라는 이름의 repository가 생성됨
 
 
+```
+ansible-playbook ecr-destroy.yml -e "name=super/cool"
+```
+name으로 설정하는 문자열의 이름을 가진 repository가 삭제됨. 삭제하려는 repository에 image가 이미 존재하면 삭제 불가
+
 
 ```
-ansible-playbook ecr-destroy.yml
+ansible-playbook ecr-destroy-force.yml -e "name=hello/world"
 ```
-`ecs_ecr` resource의 `name`에 지정한 이름의 registry가 제거됨.
+name으로 설정하는 문자열의 이름을 가진 repository가 삭제됨. 삭제하려는 repository에 image가 이미 존재해도 강제로 삭제
 
 
 
@@ -26,3 +32,6 @@ ansible-playbook ecr-destroy.yml
 
 ## 생성되는 resource
 - ECR
+
+## 생성되는 파일
+- config.json : 자격증명파일

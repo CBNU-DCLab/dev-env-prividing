@@ -1,9 +1,9 @@
-# Basic provisioning example
-- name: Ansible test
+---
+- name: ECR repository destroy force
   hosts: localhost
   vars:
-    ansible_python_interpreter: /bin/python3
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
-    - name: destroy ECR
+    - name: destroy ECR forcibly
       shell: |
-        aws ecr delete-repository --repository-name super/cool --force
+        aws ecr delete-repository --repository-name {{ name }} --force
