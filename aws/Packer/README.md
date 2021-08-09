@@ -12,7 +12,7 @@ packer build ami_create.json
 
 ### 결과
 
-packer 명령어를 실행한 위치에 아래와 같은 내용의 `manifest.json`파일 생성
+1. packer 명령어를 실행한 위치에 아래와 같은 내용의 `manifest.json`파일 생성 (해당 파일을 이용해, ami ID 
 ```
 cat manifest.json 
 {
@@ -30,6 +30,7 @@ cat manifest.json
   "last_run_uuid": "08283fd5-3d60-77d0-b530-67467947efa7"
 }
 ```
+2. docker:20.10.7 docker-compose1.29.2 가 설치된 ami를 aws ec2에 생성
 
 ### advanced
 manifest 파일에 추가적으로 데이터를 추가하고 싶으면 아래와 같이 `custom_data` 추가
