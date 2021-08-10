@@ -1,11 +1,11 @@
-# Basic provisioning example
-- name: Ansible test
+---
+- name: ECR repository destroy 
   hosts: localhost
   vars:
-    ansible_python_interpreter: /bin/python3
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
     - name: destroy ECR
       ecs_ecr:
-        name: super/cool
+        name: "{{ name }}"
         state: absent
       register: aws_ecr

@@ -1,12 +1,13 @@
-# Basic provisioning example
+---
 - name: Ansible test
   hosts: localhost
   vars:
     ansible_python_interpreter: /usr/bin/python3
+    name: up/down
   tasks:
     - name: create ECR
       ecs_ecr:
-        name: super/cool
+        name: "{{ name }}"
         state: present
       register: aws_ecr
 

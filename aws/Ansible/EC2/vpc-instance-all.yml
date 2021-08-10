@@ -1,0 +1,111 @@
+---
+- name: Ansible test
+  hosts: localhost
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    
+    vpc_name: tmp_vpc_name
+    vpc_cidr_block: 10.0.0.0/16
+    gateway_name: tmp_gateway_name
+    subnet_name: tmp_subnet_name
+    subnet_cidr_block: 10.0.0.0/24
+    routing_table_name: tmp_routing_table_name
+    region: ap-northeast-2
+    avail_zone_of_region: ap-northeast-2a
+    security_group_name: tmp_security_group_name
+    key_name: tmp_key_name
+    instance_name: tmp_instance_name
+    image_id: ami-0ba5cd124d7a79612 # ubuntu18.04 of ap-northeast-2a
+    instance_type: t2.micro
+    instance_cnt: 1
+  tasks:
+    - name: create VPC
+      ec2_vpc_net:
+        name: "{{ vpc_name }}"
+        cidr_block: "{{ vpc_cidr_block }}"
+        region: "{{ region }}"
+        state: present
+      register: vpc_result
+
+    - name: Create Internet Gateway
+      ec2_vpc_igw:
+        vpc_id: "{{ vpc_result.vpc.id }}"
+        region: "{{ region }}"
+        state: present
+        tags:
+          Name: "{{ gateway_name }}"
+      register: gateway_result
+      
+    - name: Create Public Subnet
+      ec2_vpc_subnet:
+        cidr: "{{ subnet_cidr_block }}"
+        vpc_id: "{{ vpc_result.vpc.id }}"
+        region: "{{ region }}"
+        az: "{{ avail_zone_of_region }}"
+        map_public: yes
+        state: present
+        tags:
+          Name: "{{ subnet_name }}"
+      register: subnet_result
+    
+    - name: Create Routing Table
+      ec2_vpc_route_table:
+        vpc_id: "{{ vpc_result.vpc.id }}"
+        region: "{{ region }}"
+        state: present
+        subnets: ["{{ subnet_result.subnet.id }}"]
+        tags:
+          Name: "{{ routing_table_name }}"
+        routes:
+          - dest: 0.0.0.0/0
+            gateway_id: "{{ gateway_result.gateway_id }}"
+
+
+    - name: Create Security Group
+      ec2_group:
+        name: "{{ security_group_name }}"
+        vpc_id: "{{ vpc_result.vpc.id }}"
+        region: "{{ region }}"
+        state: present
+        description: allow 22, 80
+        tags:
+          Name: "{{ security_group_name }}"
+        rules:
+        - proto: tcp
+          ports:
+          - 22
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          ports:
+          - 80
+          cidr_ip: 0.0.0.0/0
+
+    - name: Run whoami without become.
+      command: whoami
+      changed_when: false
+      become: false
+      register: whoami
+
+    - name: Create EC2 key
+      ec2_key:
+        name: "{{ key_name }}"
+        region: "{{ region }}"
+      register: key_result
+
+    - name: Save Private Key
+      copy: content="{{ key_result.key.private_key }}" dest=/{{ whoami.stdout }}/.ssh/{{ key_name }}.pem mode=0400
+      when: key_result.changed
+
+    - name: Create EC2
+      ec2:
+        key_name: "{{ key_name }}"
+        instance_tags:
+          Name: "{{ instance_name }}"
+        region: "{{ region }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ image_id }}"
+        group: "{{ security_group_name }}"
+        wait: yes
+        count: "{{ instance_cnt }}"
+        vpc_subnet_id: "{{ subnet_result.subnet.id }}"
+        assign_public_ip: yes
