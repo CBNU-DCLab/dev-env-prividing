@@ -28,7 +28,7 @@ docker run --privileged -d \
 --name dind \
 rudwns273/dind-custom:latest
 ```
-<REGION NAME>의 예시는 `ap-northease-2` 서울
+REGION NAME의 예시는 `ap-northease-2` 서울
 
 ## 실행순서
 ### 컨테이너 접속
