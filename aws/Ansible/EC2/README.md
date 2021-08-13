@@ -120,5 +120,17 @@ instance_type: t2.micro
 instance_cnt: 1
 ```
 
-### 작성자
-Penguin135
+## Deployment
+build된 docker image를 자유롭게 배포 가능
+
+## Built With
+
+* [Penguin135](https://github.com/Penguin135) - README.md 작성, Docker Image 제작, Script 작성
+
+## License / 라이센스
+
+This project is licensed under the ISC License - see the [LICENSE.md](https://github.com/CBNU-DCLab/dev-env-providing/blob/main/serving-model/LICENSE.md) file for details / 이 프로젝트는 MIT 라이센스로 라이센스가 부여되어 있습니다. 자세한 내용은 LICENSE.md 파일을 참고하세요.
+
+## Acknowledgments / 감사의 말
+
+* use for free
